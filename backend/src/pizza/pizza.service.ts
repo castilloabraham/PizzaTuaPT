@@ -59,7 +59,7 @@ export class PizzaService {
     });
 
     if (!pizzaFound) {
-      throw new NotFoundException(`Product with id ${id} not found`);
+      throw new NotFoundException(`Pizza with id ${id} not found`);
     }
 
     return pizzaFound;
@@ -73,7 +73,7 @@ export class PizzaService {
     });
 
     if (!deletedPizza) {
-      throw new NotFoundException(`Product with id ${id} not found`);
+      throw new NotFoundException(`Pizza with id ${id} not found`);
     }
 
     return deletedPizza;
