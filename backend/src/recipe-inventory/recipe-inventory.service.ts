@@ -14,6 +14,7 @@ export class RecipeInventoryService {
   
   constructor(private prismaService: PrismaService){}
 
+  //Metodo para crear una relacion nueva
   async create(createRecipeInventoryDto: CreateRecipeInventoryDto) {
     try {
       return this.prismaService.recipeInventory.create({
@@ -32,10 +33,12 @@ export class RecipeInventoryService {
     }
   }
 
+  //Metodo para obtener todas las relaciones
   findAll() {
     return this.prismaService.recipeInventory.findMany()
   }
 
+  //Metodo para obtener una relacion por id
   async findOne(id: number) {
     const RecipeInventoryFound = await this.prismaService.recipeInventory.findUnique({
       where: {
@@ -50,6 +53,7 @@ export class RecipeInventoryService {
     return RecipeInventoryFound;
   }
 
+  //Metodo para actualizar datos de una relacion
   async update(id: number, updateRecipeInventoryDto: UpdateRecipeInventoryDto) {
     const RecipeInventoryFound = await this.prismaService.recipeInventory.update({
       where: {
@@ -65,6 +69,7 @@ export class RecipeInventoryService {
     return RecipeInventoryFound;
   }
 
+  //Metodo para eliminar una relacion
   async remove(id: number) {
     const deletedRecipeInventory = await this.prismaService.recipeInventory.delete({
       where: {

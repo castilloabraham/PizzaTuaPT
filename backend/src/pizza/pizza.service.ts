@@ -14,6 +14,7 @@ export class PizzaService {
 
   constructor(private prismaService: PrismaService){}
 
+  //Metodo para crear una pizza nueva
   async create(createPizzaDto: CreatePizzaDto) {
     try {
       return this.prismaService.pizza.create({
@@ -32,10 +33,12 @@ export class PizzaService {
     }
   }
 
+  //Metodo para obtener todas las pizzas
   findAll() {
     return this.prismaService.pizza.findMany()
   }
 
+  //Metodo para obtener una pizza por id
   async findOne(id: number) {
     const pizzaFound = await this.prismaService.pizza.findUnique({
       where: {
@@ -50,6 +53,7 @@ export class PizzaService {
     return pizzaFound;
   }
 
+  //Metodo para actualizar datos de la pizza
   async update(id: number, updatePizzaDto: UpdatePizzaDto) {
     const pizzaFound = await this.prismaService.pizza.update({
       where: {
@@ -65,6 +69,7 @@ export class PizzaService {
     return pizzaFound;
   }
 
+  //Metodo para eliminar una pizza
   async remove(id: number) {
     const deletedPizza = await this.prismaService.pizza.delete({
       where: {

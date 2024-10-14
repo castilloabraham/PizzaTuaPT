@@ -14,6 +14,7 @@ export class IngredientInventoryService {
 
   constructor(private prismaService: PrismaService){}
 
+  //Metodo para crear un ingrediente nuevo
   async create(createIngredientInventoryDto: CreateIngredientInventoryDto) {
     try {
       return this.prismaService.ingredientInventory.create({
@@ -32,10 +33,12 @@ export class IngredientInventoryService {
     }
   }
 
+  //Metodo para obtener todos los ingredientes
   findAll() {
     return this.prismaService.ingredientInventory.findMany()
   }
 
+  //Metodo para obtener un ingrediente por id
   async findOne(id: number) {
     const ingredientInventoryFound = await this.prismaService.ingredientInventory.findUnique({
       where: {
@@ -50,6 +53,7 @@ export class IngredientInventoryService {
     return ingredientInventoryFound;
   }
 
+  //Metodo para actualizar datos del ingrediente
   async update(id: number, updateIngredientInventoryDto: UpdateIngredientInventoryDto) {
     const ingredientInventoryFound = await this.prismaService.ingredientInventory.update({
       where: {
@@ -65,6 +69,7 @@ export class IngredientInventoryService {
     return ingredientInventoryFound;
   }
 
+  //Metodo para eliminar un ingrediente
   async remove(id: number) {
     const deletedIngredientInventory = await this.prismaService.ingredientInventory.delete({
       where: {
