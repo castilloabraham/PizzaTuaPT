@@ -53,6 +53,38 @@ export class RecipeInventoryService {
     return RecipeInventoryFound;
   }
 
+  // Método para buscar por pizzaId
+  async findByPizzaId(pizzaId: number) {
+    const recipeInventory = await this.prismaService.recipeInventory.findMany({
+      where: {
+        pizzaId,
+      },
+    });
+
+    if (!recipeInventory || recipeInventory.length === 0) {
+      throw new NotFoundException(`No Recipe Inventory found for pizzaId ${pizzaId}`);
+    }
+
+    return recipeInventory;
+  }
+
+  // Método para buscar por ingredientInventoryId
+  async findByIngredientInventoryId(ingredientInventoryId: number) {
+    const recipeInventory = await this.prismaService.recipeInventory.findMany({
+      where: {
+        ingredientInventoryId,
+      },
+    });
+
+    if (!recipeInventory || recipeInventory.length === 0) {
+      throw new NotFoundException(
+        `No Recipe Inventory found for ingredientInventoryId ${ingredientInventoryId}`,
+      );
+    }
+
+    return recipeInventory;
+  }
+
   //Metodo para actualizar datos de una relacion
   async update(id: number, updateRecipeInventoryDto: UpdateRecipeInventoryDto) {
     const RecipeInventoryFound = await this.prismaService.recipeInventory.update({
