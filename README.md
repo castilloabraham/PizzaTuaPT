@@ -16,13 +16,13 @@ Sigue los pasos a continuación para configurar y ejecutar el backend de este pr
 ### 1. Clona el repositorio y accede al directorio del backend
 
 ```bash
-git clone https://github.com/castilloabraham/PizzaTuaPT.git
-cd backend
+$ git clone https://github.com/castilloabraham/PizzaTuaPT.git
+$ cd backend
 ```
 
 ### 2. Instala las dependencias
 ```bash
-npm install
+$ npm install
 ```
 
 ### 3. Configura las variables de entorno
@@ -34,7 +34,7 @@ DATABASE_URL="postgresql://<usuario>:<contraseña>@<host>:<puerto>/<nombre_base_
 
 ### 4. Ejecuta las migraciones de la base de datos
 ```bash
-npx prisma migrate dev --name init
+$ npx prisma migrate dev --name init
 ```
 
 ## 5. Compilar y ejecutar el proyecto
