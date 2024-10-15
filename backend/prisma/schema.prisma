@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model IngredientInventory {
+  id     Int     @id @default(autoincrement())
+  name   String
+  price  Float
+  amount Float
+  unit   String
+  recipeInventories RecipeInventory[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+model RecipeInventory {
+  id                    Int    @id @default(autoincrement())
+  ingredientInventoryId Int
+  ingredientInventory   IngredientInventory @relation(fields: [ingredientInventoryId], references: [id])
+  pizzaId               Int
+  pizza                 Pizza @relation(fields: [pizzaId], references: [id])
+  amount                Float
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+model Pizza {
+  id          Int     @id @default(autoincrement())
+  name        String
+  total_price Float
+  recipeInventories RecipeInventory[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+enum Role {
+  USER    // Usuario normal
+  ADMIN   // Administrador
+  MANAGER // Otros roles
+}
+
+model User {
+  id         Int    @id @default(autoincrement())
+  first_name String
+  last_name  String
+  email      String @unique
+  password   String
+  role       Role   @default(USER) //rol usando el enum Role
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
